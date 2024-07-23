@@ -1,6 +1,8 @@
 pipeline{
   agent any
-  
+  parameters{
+        choice(name: 'action', choices: 'create\ndelete', description: 'Choose to create/Destroy')
+  }
    stages{
      stage('Git Checkout'){
        steps{
@@ -8,9 +10,16 @@ pipeline{
        }
      }
      stage('build'){
+       when { expression {  params.action == 'create' } }
        steps{
-         echo "Building the application..."
+         echo "Creating the application..."
        }
+
+       when { expression {  params.action == 'deleting' } }
+       steps{
+         echo "Deleting the application..."
+       }
+       
      }
      
    }
