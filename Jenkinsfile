@@ -14,11 +14,6 @@ pipeline{
        steps{
          echo "Creating the application..."
        }
-
-       when { expression {  params.action == 'deleting' } }
-       steps{
-         echo "Deleting the application..."
-       }
        
      }
      
